@@ -1,0 +1,20 @@
+\documentclass[dvips,ruledheader]{abnt}
+\usepackage[brazil]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage[pdftex]{graphicx}
+% \usepackage[pdftex]{hyperref}
+\usepackage{abnt-alf}
+\usepackage{latexsym}
+\usepackage{psfrag}
+\usepackage[center]{caption2}
+\usepackage{epigraph}
+
+\begin{document}
+\DeclareGraphicsRule{.eps.gz}{eps}{.eps.bb}{`gunzip -c #1}
+
+\include{fs-article}
+
+\bibliography{bb}
+\bibliographystyle{abnt-alf}
+
+\end{document}

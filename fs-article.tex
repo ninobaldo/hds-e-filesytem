@@ -1,0 +1,69 @@
+\section{Introdução}
+
+Antes de entrar na teoria do \emph{File System (FS)} é importante saber alguns aspectos do Hard Disk (HD). 
+
+\begin{figure}[htp]
+	\centering
+	\includegraphics[scale=0.8]{img/hd}
+	\label{fig:hd}
+\end{figure}
+
+O HD é formado por varias bandejas circulares (discos) que giram num eixo. Cada face da bandeja (ou disco) são divididos em círculos concêntricos chamados de cilindros, trilhas ou pistas. Cada trilha possui um determinado número de setores.
+
+\begin{quote}
+Para sabermos qual o número total de setores de um disco rígido, basta multiplicarmos sua geometria, ou seja, o seu número de cilindros, lados (parâmetro também chamado de ``cabeças'') e setores por trilha. Um disco rígido que possua a geometria 2448 cilindros, 16 cabeças e 63 setores por trilha, terá 2448 x 16 x 63 = 2.467.584 setores. Multiplicando-se o número total de setores por 512 bytes, teremos sua capacidade total, no caso 1.263.403.008 bytes. \cite{CHHD}
+\end{quote}
+
+\begin{figure}[htp]
+	\centering
+	\includegraphics[scale=0.8]{img/hd2}
+	\caption{Setores do HD}
+	\label{fig:hd2}
+\end{figure}
+
+Esses cilindros são dividos em setores de 512 Bytes cada. Essa é a unidade ou elemento que o HD trabalha.
+
+O setor 0 é conhecido como \emph{Master Boot Record (MBR)} o fim do MBR possui uma tabela de partições do disco (início e fim de cada partição).
+
+\section{Partição}
+
+Partição a grosso modo é uma divisão de espaço no HD. Num disco comum podemos ter esses tipos de partições:
+ 
+\begin{itemize}
+  \item[$\bullet$]Primária: No máximo 4 partições primária, se existir quatro partições primárias nenhuma outra partição poderá existir.
+  \item[$\bullet$]Estendida: É um tipo especial de partição primária, só uma por disco e não pode conter arquivos só partições lógicas
+  \item[$\bullet$]Lógica: ficam dentro das estendidas, podendo haver no máximo 12 partições em um disco
+\end{itemize}
+
+O disco pode ter varias partições respeitando os limetes acima e cada partição pode ter qualquer FS.
+
+A partição que o OS está carregado é chamada de \emph{partição ativa}. No boot a BIOS lê e executa a MBR achando a partição ativa e lendo-a executando o 1º bloco da partição (Bloco de boot), por default todas as partições com ou sem OS possuem um bloco de boot.
+
+\begin{figure}[htp]
+	\centering
+	\includegraphics[scale=0.8]{img/par}
+	\caption{Partições  \cite{PUCPRSA}}
+	\label{fig:par}
+\end{figure}
+
+Legenda:
+Bloco de boot: instruções sobre o carregamento do SO;
+Superbloco: principais parâmetros do FS (exemplo: identificador do tipo de FS -- "magic number"; número de blocos);
+Gerência de espaço livre: mapa de bits ou lista ligada (veja abaixo).
+i-nodes: estruturas de dados (uma por arquivo) com todas as informações do arquivo;
+Diretório raiz do sistema de arquivos.
+Demais d iretórios e arquivos.
+
+\section{File System}
+
+O sistema de arquivo ou \emph{File System - FS} nada mais é do que um organizador (estrutura, identificação, acesso, utilização, proteção e implementação) de dados do Sistema Operacional ou Operating System - OS. Existem diversos FS e cada um trabalha de um jeito para organizar os dados no disco e em geral quanto mais recente é o OS maior é a gama de FS suportados.
+
+Exemplos de FS:
+\begin{itemize}
+  \item[$\bullet$]CD-ROM  File System (CDFS): 
+  \item[$\bullet$]Network File System (NFS):
+  \item[$\bullet$]NT File System ou New Technology File System (NTFS):
+  \item[$\bullet$]USB flash drive (UFD):
+\end{itemize}
+
+Blocos (unidade de subsídio) ou \emph{clusters} é a menor unidade que o OS capaz de gerir. O cluster é formado por um ou mais setores, sendo que quanto maior o cluster menos entidades o OS manipula. 
